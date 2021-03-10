@@ -47,7 +47,7 @@ Things you may want to cover:
 - has_many :items
 - has_many :purchases
 
-## 配送先住所 テーブル
+## addresses テーブル
 
 | Column | Type   | Options     |
 | ------ | ------ | ----------- |
@@ -55,7 +55,7 @@ Things you may want to cover:
 | address1_id       | integer| null: false |
 | shikucyouson      | string | null: false |
 | bannchi           | string | null: false |
-| tatemonomei       | string | null: false |
+| tatemonomei       | string |
 | phone-number      | string | null: false |
 | purchase          | references | null: false, foreign_key: true |
 
