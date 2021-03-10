@@ -32,7 +32,7 @@ Things you may want to cover:
 | -------- | ------ | ----------- |
 | nickname          | string | null: false |
 | encrypted_password| string | null: false |
-| email             | string | null: false |
+| email             | string | null: false | unique: true |
 | myouji_kanji      | string | null: false |
 | namae_kanji       | string | null: false |
 | myouji_katakana   | string | null: false |
@@ -45,7 +45,6 @@ Things you may want to cover:
 ////Association////
 
 - has_many :items
-- has_many :addresses
 - has_many :purchases
 
 ## 配送先住所 テーブル
@@ -54,17 +53,15 @@ Things you may want to cover:
 | ------ | ------ | ----------- |
 | postal-code       | string | null: false |
 | address1_id       | integer| null: false |
-| address2          | string | null: false |
-| address3          | string | null: false |
-| address4          | string | null: false |
+| shikucyouson      | string | null: false |
+| bannchi           | string | null: false |
+| tatemonomei       | string | null: false |
 | phone-number      | string | null: false |
-| purchases         | references | null: false, foreign_key: true |
+| purchase          | references | null: false, foreign_key: true |
 
 
 ////Association////
 
-- belongs_to :user
-- belongs_to :item
 - belongs_to :purchase
 
 
@@ -72,21 +69,20 @@ Things you may want to cover:
 
 | Column | Type       | Options                        |
 | ------ | ---------- | ------------------------------ |
-| price        |integer    | null: false |
-| user         | reference |null: false, foreign_key: true |
-| item         | string    | null: false |
-| explanation  | text      | null: false |
-| category_id  | integer   | null: false |
-| status_id    | integer   | null: false |
-| fee_id       | integer   | null: false |
-| address1_id  | integer   | null: false |
-| days_required| integer   | null: false |
+| price           |integer    | null: false |
+| user            | reference |null: false, foreign_key: true |
+| item            | string    | null: false |
+| explanation     | text      | null: false |
+| category_id     | integer   | null: false |
+| status_id       | integer   | null: false |
+| fee_id          | integer   | null: false |
+| address1_id     | integer   | null: false |
+| days_required_id| integer   | null: false |
 
 
 ////Association////
 
-- belongs_to :addresses
-- belongs_to :purchase
+- has_one    :purchase
 - belongs_to :user
 
 
@@ -103,3 +99,4 @@ Things you may want to cover:
 
 - belongs_to :item
 - belongs_to :user
+- has_one    :address
