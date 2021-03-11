@@ -36,7 +36,7 @@ Things you may want to cover:
 | myouji_kanji      | string | null: false |
 | namae_kanji       | string | null: false |
 | myouji_katakana   | string | null: false |
-| namae_kanji       | string | null: false |
+| namae_katakana    | string | null: false |
 | seinenngappi      | date   | null: false |
 
 
