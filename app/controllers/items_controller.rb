@@ -1,10 +1,8 @@
 class ItemsController < ApplicationController
   def index
   end
-
   # def new
   #   @user = User.new
-
   #   if @user.save
   #     redirect_to root_path
   #   else
@@ -20,13 +18,5 @@ class ItemsController < ApplicationController
   #     render :update
   #   end
   # end     今後使う可能性ある為
-
-  private
-
-
-  def users_params
-    params.require(:user).permit(:email,:password)
-  end
-
 end
 

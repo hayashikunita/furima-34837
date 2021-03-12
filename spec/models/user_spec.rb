@@ -10,6 +10,12 @@ RSpec.describe User, type: :model do
       expect(@user).to be_valid
     end
 
+    it 'emailは@がないと登録できない' do
+      @user.email = 'aaaaaa'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Email is invalid")
+    end
+
     it 'nameが空では登録できないこと' do
       @user.nickname = ''
       @user.valid?
@@ -54,11 +60,23 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors[:myouji_kanji]).to include("can't be blank")
     end
-  
+
+    it "myouji_kanjiは漢字・平仮名・カタカナ以外では登録できないこと" do
+      @user.myouji_kanji = 'ra-men'
+      @user.valid?
+      expect(@user.errors[:myouji_kanji]).to include("is invalid")
+    end
+
     it "namae_kanjiがない場合は登録できないこと" do
       @user.namae_kanji = ''
       @user.valid?
       expect(@user.errors[:namae_kanji]).to include("can't be blank")
+    end
+
+    it "namae_kanjiは漢字・平仮名・カタカナ以外では登録できないこと" do
+      @user.namae_kanji = 'sushi'
+      @user.valid?
+      expect(@user.errors[:namae_kanji]).to include("is invalid")
     end
 
     it "myouji_katakanaがない場合は登録できないこと" do
@@ -67,10 +85,22 @@ RSpec.describe User, type: :model do
       expect(@user.errors[:myouji_katakana]).to include("can't be blank")
     end
 
+    it "myouji_katakanaは全角カタカナ以外では登録できないこと" do
+      @user.myouji_katakana = 'niku肉にくnumber1'
+      @user.valid?
+      expect(@user.errors[:myouji_katakana]).to include("is invalid")
+    end
+
     it "namae_katakanaがない場合は登録できないこと" do
       @user.namae_katakana = ''
       @user.valid?
       expect(@user.errors[:namae_katakana]).to include("can't be blank")
+    end
+
+    it "namae_katakanaは全角カタカナ以外では登録できないこと" do
+      @user.namae_katakana = 'niku肉にくnumber1'
+      @user.valid?
+      expect(@user.errors[:namae_katakana]).to include("is invalid")
     end
 
     it "seinenngappiがない場合は登録できないこと" do
