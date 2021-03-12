@@ -6,8 +6,8 @@ class User < ApplicationRecord
   
   with_options presence: true do
   validates :nickname
-  validates :myouji_kanji ,format:{with: /\A[ぁ-んァ-ン一-龥]/ }
-  validates :namae_kanji ,format:{with: /\A[ぁ-んァ-ン一-龥]/}
+  validates :myouji_kanji ,format:{with: /\A[ぁ-んァ-ン一-龥々]/}
+  validates :namae_kanji ,format:{with: /\A[ぁ-んァ-ン一-龥々]/}
   validates :myouji_katakana,format:{with: /\A[ァ-ヶー－]+\z/}
   validates :namae_katakana,format:{with: /\A[ァ-ヶー－]+\z/}
   validates :seinenngappi

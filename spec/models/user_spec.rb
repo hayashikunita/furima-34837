@@ -87,15 +87,15 @@ RSpec.describe User, type: :model do
 
 
     it 'パスワードに英小文字が含まれない場合無効な状態であること' do
-      user = User.new(password: '1'+'1' * 5)
-      user.valid?
-      expect(user.errors[:password]).to include('は半角6~1000文字英小文字・数字それぞれ１文字以上含む必要があります')
+      @user. password = "111111"
+      @user.valid?
+      expect(@user.errors[:password]).to include('は半角6~1000文字英小文字・数字それぞれ１文字以上含む必要があります')
     end
   
     it 'パスワードに数字が含まれない場合無効な状態であること' do
-      user = User.new(password: 'a'+'a' * 5)
-      user.valid?
-      expect(user.errors[:password]).to include('は半角6~1000文字英小文字・数字それぞれ１文字以上含む必要があります')
+      @user. password = "aaaaaa"
+      @user.valid?
+      expect(@user.errors[:password]).to include('は半角6~1000文字英小文字・数字それぞれ１文字以上含む必要があります')
     end
   end
 end
