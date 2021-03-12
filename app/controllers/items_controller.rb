@@ -10,7 +10,7 @@ class ItemsController < ApplicationController
   #   else
   #     render :new
   #   end
-  # end
+  # end     今後使う可能性ある為
 
   # def update
   #   @user = User.find(params[:id])
@@ -19,7 +19,7 @@ class ItemsController < ApplicationController
   #   else
   #     render :update
   #   end
-  # end
+  # end     今後使う可能性ある為
 
   private
 
