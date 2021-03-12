@@ -1,0 +1,24 @@
+{
+	"folders": [
+		{
+			"name": "chat-app",
+			"path": "../../../../../chat-app"
+		},
+		{
+			"name": "memo",
+			"path": "../../../../../memo"
+		},
+		{
+			"name": "pictweet",
+			"path": "../../../../../pictweet"
+		},
+		{
+			"name": "protospace-34837",
+			"path": "../../../../../protospace-34837"
+		},
+		{
+			"name": "furima-34837",
+			"path": "../../../.."
+		}
+	]
+}
