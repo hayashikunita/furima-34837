@@ -67,9 +67,9 @@ Things you may want to cover:
 
 ## items テーブル
 
-| Column | Type       | Options                        |
-| ------ | ---------- | ------------------------------ |
-| price           |integer    | null: false |
+| Column | Type       | Options             |
+| ------ | ---------- | ------------------- |
+| price           | integer   | null: false |
 | user            | reference |null: false, foreign_key: true |
 | item            | string    | null: false |
 | explanation     | text      | null: false |
