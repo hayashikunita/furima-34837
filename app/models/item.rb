@@ -14,9 +14,9 @@ class Item < ApplicationRecord
 
 
   has_one_attached :image 
-  # 今後必要になるかも知れない。
 
   with_options presence: true do
+  validates :image
   validates :item
   validates :explanation
   validates :category_id , numericality: { other_than: 1 } 
