@@ -1,8 +1,8 @@
 class ItemsController < ApplicationController
   
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
   before_action :set_items, only: [:show, :edit, :update]
-
+  before_action :sushi_niku, only: [:edit, :update]
 
 
   def index
@@ -26,25 +26,10 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    if user_signed_in?
-        unless current_user.id == @item.user.id 
-          redirect_to root_path
-        end
-    else
-      redirect_to new_user_session_path
-    end
   end
 
 
   def update
-    if user_signed_in?
-      unless current_user.id == @item.user.id 
-        redirect_to root_path
-      end
-    else
-      redirect_to new_user_session_path
-    end
-    
     if @item.update(items_params)
        redirect_to root_path
     else
@@ -61,6 +46,13 @@ class ItemsController < ApplicationController
   def set_items
     @item = Item.find(params[:id])
   end
+  
+  def sushi_niku
+    unless current_user.id == @item.user.id 
+      redirect_to root_path
+    end
+  end
+
 
 end
 
