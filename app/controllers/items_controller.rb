@@ -22,15 +22,31 @@ class ItemsController < ApplicationController
     end
   end
 
-  def show    
+  def show
   end
 
   def edit
+    if user_signed_in?
+        unless current_user.id == @item.user.id 
+          redirect_to root_path
+        end
+    else
+      redirect_to new_user_session_path
+    end
   end
 
+
   def update
+    if user_signed_in?
+      unless current_user.id == @item.user.id 
+        redirect_to root_path
+      end
+    else
+      redirect_to new_user_session_path
+    end
+    
     if @item.update(items_params)
-      redirect_to root_path
+       redirect_to root_path
     else
       render :edit
     end
