@@ -17,5 +17,5 @@ class User < ApplicationRecord
                                  message: 'は半角6~1000文字英小文字・数字それぞれ１文字以上含む必要があります' }
 
   has_many :item
-  # 上の記述は途中で書き加えました。
+  has_many :purchases
 end
