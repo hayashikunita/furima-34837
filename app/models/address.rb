@@ -5,7 +5,6 @@ class Address < ApplicationRecord
     validates :address1_id
     validates :shikucyouson
     validates :bannchi
-    validates :tatemonomei
     validates :phone_number
     validates :purchase
   end

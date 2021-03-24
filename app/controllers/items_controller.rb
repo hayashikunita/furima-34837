@@ -44,7 +44,7 @@ class ItemsController < ApplicationController
   def items_params
     params.require(:item).permit(:image, :price, :item, :explanation, :category_id, :status_id, :fee_id, :address1_id, :day_id).merge(user_id: current_user.id)
   end
-# ここにmergeのところに、item_idが必要になる。purchaseかAddressで
+  
   def set_items
     @item = Item.find(params[:id])
   end

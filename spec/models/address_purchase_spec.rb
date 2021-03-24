@@ -2,12 +2,22 @@ require 'rails_helper'
 
 RSpec.describe AddressPurchase, type: :model do
   describe '#create' do
+
     before do
-      @address_purchase = FactoryBot.build(:address_purchase)
+      user = FactoryBot.create(:user)
+      item = FactoryBot.create(:item)
+      @address_purchase = FactoryBot.build(:address_purchase, user_id: user.id, item_id: item.id)
+      sleep 0.1 # ユーザーや商品を生成することでDBとのやりとりが発生し、エラーとなる場合が考えられるためsleepメソッドをはさみます。復習する為に残す。
     end
 
     context '登録に成功する時' do
+
       it '入力欄を全て埋めれば登録できること' do
+        expect(@address_purchase).to be_valid
+      end
+
+      it '建物名に入力されていなくても登録できること' do
+        @address_purchase.tatemonomei = ''
         expect(@address_purchase).to be_valid
       end
     end
@@ -25,26 +35,7 @@ RSpec.describe AddressPurchase, type: :model do
         expect(@address_purchase.errors.full_messages).to include("Shikucyouson can't be blank")
       end
 
-      
-
-      # it 'priceが全角数字では登録できないこと' do
-      #   @address_purchase.price = '１１１１'
-      #   @address_purchase.valid?
-      #   expect(@address_purchase.errors.full_messages).to include('Price Half-width number')
-      # end
-
-      # it '半角英数混合では登録できないこと' do
-      #   @address_purchase.price = '12aa'
-      #   @address_purchase.valid?
-      #   expect(@address_purchase.errors.full_messages).to include('Price Half-width number')
-      # end
-
-      # it '半角英語だけでは登録できないこと' do
-      #   @address_purchase.price = 'aaa'
-      #   @address_purchase.valid?
-      #   expect(@address_purchase.errors.full_messages).to include('Price Half-width number')
-      # end
-
+    
       it 'bannchiは空では登録できないこと' do
         @address_purchase.bannchi = ''
         @address_purchase.valid?
@@ -75,42 +66,6 @@ RSpec.describe AddressPurchase, type: :model do
         expect(@address_purchase.errors.full_messages).to include('Phone number is invalid')
       end
       
-        # it 'status_idが1の場合は登録できないこと' do
-      #   @address_purchase.status_id = 1
-      #   @address_purchase.valid?
-      #   expect(@address_purchase.errors.full_messages).to include('Status must be other than 1')
-      # end
-
-      # it 'fee_idが1の場合は登録できないこと' do
-      #   @address_purchase.fee_id = 1
-      #   @address_purchase.valid?
-      #   expect(@address_purchase.errors.full_messages).to include('Fee must be other than 1')
-      # end
-
-      # it 'address1_idが1の場合は登録できないこと' do
-      #   @address_purchase.address1_id = 1
-      #   @address_purchase.valid?
-      #   expect(@address_purchase.errors.full_messages).to include('Address1 must be other than 1')
-      # end
-
-      # it 'day_idが1の場合は登録できないこと' do
-      #   @address_purchase.day_id = 1
-      #   @address_purchase.valid?
-      #   expect(@address_purchase.errors.full_messages).to include('Day must be other than 1')
-      # end
-
-      # it '販売価格が¥300より少ない時は出品できないこと' do
-      #   @address_purchase.price = 299
-      #   @address_purchase.valid?
-      #   expect(@address_purchase.errors.full_messages).to include('Price Out of setting range')
-      # end
-
-      # it '販売価格が¥9999999より多い時は出品できないこと' do
-      #   @address_purchase.price = 10_000_000
-      #   @address_purchase.valid?
-      #   expect(@address_purchase.errors.full_messages).to include('Price Out of setting range')
-      # end
-
       it "tokenが空では登録できないこと" do
         @address_purchase.token = nil
         @address_purchase.valid?
@@ -121,27 +76,3 @@ RSpec.describe AddressPurchase, type: :model do
   end
 
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# require 'rails_helper'
-
-# RSpec.describe User, type: :model do
-#   before do
-#     @user = FactoryBot.build(:user)
-#   end
-# end

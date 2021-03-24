@@ -7,6 +7,7 @@ FactoryBot.define do
   phone_number { '12345678' }
   address1_id { 2 }
   token {"tok_abcdefghijk00000000000000000"}
+  tatemonomei {"あああ"}
   end
 end
 
