@@ -78,7 +78,7 @@ RSpec.describe AddressPurchase, type: :model do
         expect(@address_purchase.errors.full_messages).to include("User can't be blank")
       end
 
-      it 'bannchiは空では登録できないこと' do
+      it 'item_idは空では登録できないこと' do
         @address_purchase.item_id = ''
         @address_purchase.valid?
         expect(@address_purchase.errors.full_messages).to include("Item can't be blank")
