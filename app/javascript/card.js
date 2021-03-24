@@ -13,6 +13,7 @@ const pay = () => {
       exp_month: formData.get("address_purchase[exp_month]"),
       exp_year: `20${formData.get("address_purchase[exp_year]")}`,
     };
+    console.log('発火')
       Payjp.createToken(card, (status, response) => {
       if (status == 200) {
         const token = response.id;
@@ -20,16 +21,12 @@ const pay = () => {
         const tokenObj = `<input value=${token} name='token' type="hidden"> `;
         renderDom.insertAdjacentHTML("beforeend", tokenObj);
         
-
         document.getElementById("card-number").removeAttribute("name");
         document.getElementById("card-cvc").removeAttribute("name");
         document.getElementById("card-exp-month").removeAttribute("name");
         document.getElementById("card-exp-year").removeAttribute("name");
-  
-        document.getElementById("charge-form").submit();
-
-
       }
+      document.getElementById("charge-form").submit();
     });
   });
 };

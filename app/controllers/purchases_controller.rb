@@ -1,13 +1,11 @@
 class PurchasesController < ApplicationController
+  before_action :authenticate_user!, only: [:index, :create]
+  before_action :move_to_index, only: [:create, :index]
 
 
   def index
     @address_purchase = AddressPurchase.new
     @item = Item.find(params[:item_id])
-    # 一つだけの時はこの記述
-    # 使わないといけないわけではない
-    # よそのモデルから参照するときは、、、コントローラーをまたいで使う時にこうなる
-    # /items/:item_id/purchases(.:format)  の:item_id
   end
 
   def create
@@ -20,13 +18,6 @@ class PurchasesController < ApplicationController
     else
       render :index
     end
-    # @donation_address = DonationAddress.new(donation_params)
-    # if @donation_address.valid?
-    #   @donation_address.save
-    #   redirect_to root_path
-    # else
-    #   render :new
-    # end
   end
   
   private
@@ -39,9 +30,15 @@ class PurchasesController < ApplicationController
     @item = Item.find(params[:item_id])
     Payjp.api_key = "sk_test_827629334d9cfd104eb8b8f1" 
     Payjp::Charge.create(
-      amount: @item.price,  # 商品の値段
-      card: purchase_params[:token],    # カードトークン
-      currency: 'jpy'                 # 通貨の種類（日本円）
+      amount: @item.price,
+      card: purchase_params[:token], 
+      currency: 'jpy' 
     )
   end
+
+  def move_to_index
+    @item = Item.find(params[:item_id])
+    redirect_to root_path if current_user.id == @item.user.id
+  end
+
 end
