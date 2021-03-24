@@ -72,6 +72,24 @@ RSpec.describe AddressPurchase, type: :model do
         expect(@address_purchase.errors.full_messages).to include("Token can't be blank")
       end
 
+      it 'user_idは空では登録できないこと' do
+        @address_purchase.user_id = ''
+        @address_purchase.valid?
+        expect(@address_purchase.errors.full_messages).to include("User can't be blank")
+      end
+
+      it 'bannchiは空では登録できないこと' do
+        @address_purchase.item_id = ''
+        @address_purchase.valid?
+        expect(@address_purchase.errors.full_messages).to include("Item can't be blank")
+      end
+
+      it '電話番号が半角英数混合では登録できないこと' do
+        @address_purchase.phone_number = '12ab'
+        @address_purchase.valid?
+        expect(@address_purchase.errors.full_messages).to include("Phone number is invalid")
+      end
+
     end
   end
 
